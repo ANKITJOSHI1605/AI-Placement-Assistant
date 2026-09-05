@@ -1,8 +1,13 @@
 # PlacementAI — AI Placement Preparation Assistant
 
 [![CI](https://github.com/ANKITJOSHI1605/AI-Placement-Assistant/actions/workflows/ci.yml/badge.svg)](https://github.com/ANKITJOSHI1605/AI-Placement-Assistant/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-43e6b1)](https://ai-placement-assistant-beryl.vercel.app)
 
 A full-stack resume-analysis application that extracts text from PDF/TXT resumes, calculates a transparent ATS-style readiness score, compares skills against a job description, and recommends concrete improvements.
+
+**Live application:** https://ai-placement-assistant-beryl.vercel.app  
+**API:** https://ai-placement-assistant-a6uq.onrender.com  
+**API documentation:** https://ai-placement-assistant-a6uq.onrender.com/docs
 
 ## Features
 
@@ -46,12 +51,11 @@ cd backend && pytest
 cd ../frontend && npm run build
 ```
 
-## Deployment
+## Production configuration
 
-1. Create a Render Blueprint from the repository; `render.yaml` deploys the API.
-2. Deploy `frontend` on Vercel.
-3. In Vercel set `VITE_API_URL=https://YOUR-API.onrender.com/api`.
-4. In Render set `CORS_ORIGINS=https://YOUR-FRONTEND.vercel.app` and redeploy.
+- Vercel: `VITE_API_URL=https://ai-placement-assistant-a6uq.onrender.com/api`
+- Render: `CORS_ORIGINS=https://ai-placement-assistant-beryl.vercel.app`
+- Render health check: `/api/health`
 
 ## API
 
