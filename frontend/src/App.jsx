@@ -37,9 +37,10 @@ export default function App() {
       <div className="panel results">
         {!result ? <div className="empty"><div>◎</div><h2>Your report appears here</h2><p>The score is rule-based and explainable—not a guarantee from any employer.</p></div> : <>
           <div className="score"><div><strong>{result.ats_score}</strong><span>/100</span></div><section><p>ATS readiness</p><meter min="0" max="100" value={result.ats_score}/><small>{result.word_count} words · {result.sections_found.length}/5 core sections</small></section></div>
-          <div className="grid"><article><span>Job match</span><strong>{result.match_percentage}%</strong></article><article><span>Skills found</span><strong>{result.resume_skills.length}</strong></article></div>
+          <div className="grid"><article><span>{result.match_basis === 'role_estimate' ? 'Estimated role match' : 'Job skill match'}</span><strong>{result.match_percentage == null ? 'N/A' : `${result.match_percentage}%`}</strong></article><article><span>Skills found</span><strong>{result.resume_skills.length}</strong></article></div>
+          {result.match_note && <p role="status">{result.match_note}</p>}
           <h3>Matched skills</h3><div className="chips good">{result.matched_skills.length ? result.matched_skills.map(x => <span key={x}>{x}</span>) : <p>No job-specific matches yet.</p>}</div>
-          <h3>Missing from resume</h3><div className="chips">{result.missing_skills.map(x => <span key={x}>{x}</span>)}</div>
+          <h3>{result.match_basis === 'role_estimate' ? 'Role-baseline skills not detected' : 'Job skills not detected'}</h3><div className="chips">{result.missing_skills.length ? result.missing_skills.map(x => <span key={x}>{x}</span>) : <p>{result.match_percentage == null ? 'No recognized job requirements to compare yet.' : 'No missing skills detected in this comparison.'}</p>}</div>
           <h3>Recommended improvements</h3><ol>{result.recommendations.map(x => <li key={x}>{x}</li>)}</ol>
         </>}
       </div>
@@ -47,4 +48,3 @@ export default function App() {
     <footer>Private by design: uploaded files are analyzed in memory and are not stored.</footer>
   </main>;
 }
-
